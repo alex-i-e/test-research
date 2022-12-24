@@ -1,15 +1,18 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
-const SearchInput = forwardRef((props, ref) => {
-	const inputRef = useRef<HTMLInputElement>(null);
-	useImperativeHandle(ref, () => ({
-		getInputValue() {
-			console.log('inputRef.current=', inputRef.current);
-			return inputRef.current?.value ?? '';
-		}
-	}))
+const SearchInput = forwardRef<{ getInputValue(): string }, unknown>(
+  (_, ref) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(ref, () => ({
+      getInputValue() {
+        return inputRef.current?.value ?? "";
+      },
+    }));
 
-	return <input ref={inputRef} type="search" placeholder="Search images by text" />
-});
+    return (
+      <input ref={inputRef} type="search" placeholder="Search images by text" />
+    );
+  }
+);
 
 export { SearchInput };

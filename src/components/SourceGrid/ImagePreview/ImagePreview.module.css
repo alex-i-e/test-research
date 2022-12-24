@@ -1,0 +1,14 @@
+.figure {
+  box-shadow: #1a1a0944 4px 4px 10px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.img {
+}
+
+.figcaption {
+  margin: 8px 4px;
+}

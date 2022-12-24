@@ -1,4 +1,9 @@
 .wrapper {
-    display: grid;
-    grid-gap: 10px;
+  --auto-grid-min-size: 200px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--auto-grid-min-size), 1fr)
+  );
 }
