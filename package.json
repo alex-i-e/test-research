@@ -1,21 +1,39 @@
 {
   "name": "image-research",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "Research images",
+  "main": "index.html",
+  "repository": "git@github.com:alex-i-e/test-research.git",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ./src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   },
   "dependencies": {
+    "eslint": "8.30.0",
+    "normalize.css": "8.0.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-router": "6.6.1",
+    "react-router-dom": "6.6.1"
   },
   "devDependencies": {
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
+    "@typescript-eslint/eslint-plugin": "5.47.0",
+    "@typescript-eslint/parser": "5.47.0",
     "@vitejs/plugin-react-swc": "3.0.1",
+    "eslint-plugin-react": "7.31.11",
+    "husky": "8.0.2",
     "typescript": "4.9.4",
     "vite": "4.0.2"
   }
