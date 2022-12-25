@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  background-color: var(--pink5);
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  letter-spacing: 3px;
+  font-weight: bold;
+  color: var(--purple100);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  box-shadow: #888888 4px 2px 20px;
+  padding: 24px 20px;
+}
+
+.label {
+  margin-bottom: 4px;
+}
+.input {
+  margin-bottom: 20px;
+}
+
+.submit {
+  padding: 2px 10px;
+  align-self: flex-end;
+}

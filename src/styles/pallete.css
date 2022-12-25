@@ -1,0 +1,22 @@
+:root {
+  --pink100: #f384ffff;
+  --pink80: rgba(243, 132, 255, 0.8);
+  --pink60: rgba(243, 132, 255, 0.6);
+  --pink40: rgba(243, 132, 255, 0.4);
+  --pink20: rgba(243, 132, 255, 0.2);
+  --pink5: rgba(243, 132, 255, 0.05);
+
+  --purple100: #a053f2ff;
+  --purple80: rgba(160, 83, 242, 0.8);
+  --purple60: rgba(160, 83, 242, 0.6);
+  --purple40: rgba(160, 83, 242, 0.4);
+  --purple20: rgba(160, 83, 242, 0.2);
+  --purple5: rgba(160, 83, 242, 0.05);
+
+  --sapphire100: #535bf2ff;
+  --sapphire80: rgba(83, 91, 242, 0.8);
+  --sapphire60: rgba(83, 91, 242, 0.6);
+  --sapphire40: rgba(83, 91, 242, 0.4);
+  --sapphire20: rgba(83, 91, 242, 0.2);
+  --sapphire5: rgba(83, 91, 242, 0.05);
+}

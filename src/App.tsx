@@ -1,11 +1,10 @@
 import React, { lazy } from "react";
 import { Routes } from "react-router-dom";
-
-import "./App.module.css";
+import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
+
 import { AuthProvider } from "./contexts/AuthContext/AuthContext";
 import { AclRoute } from "./routes/AclRoute/AclRoute";
-import { Route } from "react-router";
 
 const Home = lazy(() => import("./routes/Home/Home"));
 const NotFound = lazy(() => import("./routes/NotFound/NotFound"));

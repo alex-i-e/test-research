@@ -1,0 +1,36 @@
+:root {
+  --header-height: 50px;
+}
+
+.wrapper {
+  display: grid;
+  height: 100vh;
+  grid-template-areas:
+    "header"
+    "main";
+}
+
+.header {
+  grid-area: header;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  border-bottom: var(--purple100) 2px solid;
+  background-color: var(--pink100);
+  box-shadow: var(--sapphire100) 4px 0 20px;
+}
+
+.main {
+  grid-area: main;
+  height: calc(100vh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+}
+
+.searchSection {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}

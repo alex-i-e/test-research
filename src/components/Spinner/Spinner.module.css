@@ -1,6 +1,56 @@
 .wrapper {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(2px);
+}
+.wrapper.relative {
+  position: relative;
+  top: initial;
+  left: initial;
+  width: initial;
+  height: initial;
+  background-color: initial;
+}
+
+.spinner {
+  position: absolute;
+  display: flex;
+  transform: translate(50%, 50%);
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border-bottom: #535bf2 4px solid;
+  animation: 1s infinite normal rotation;
+}
+.spinner.relative {
+  position: relative;
+}
+.spinner.spinner-S {
+  width: 10px;
+  height: 10px;
+}
+.spinner.spinner-M {
+  width: 20px;
+  height: 20px;
+}
+.spinner.spinner-L {
+  width: 28px;
+  height: 28px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }

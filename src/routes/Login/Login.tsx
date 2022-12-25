@@ -2,16 +2,17 @@ import React, { FC, FormEvent, useRef } from "react";
 
 import { useAuth } from "../../contexts/AuthContext/useAuth";
 
+import styles from "./Login.module.css";
+
 enum LoginFields {
   login = "login",
 }
 
 const Login: FC = () => {
   const { setLogin } = useAuth();
-  // @todo: expose only submit method
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = (e: FormEvent<HTMLButtonElement>) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formRef.current) return;
@@ -22,17 +23,19 @@ const Login: FC = () => {
   };
 
   return (
-    <div>
-      Login Page
-      <form ref={formRef}>
-        <label>Name</label>
+    <div className={styles.wrapper}>
+      <h1 className={styles.title}>Enjoy image searching...</h1>
+      <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
+        <label className={styles.label}>Name</label>
         <input
+          className={styles.input}
           type="text"
           name={LoginFields.login}
-          placeholder={"Please type user name"}
+          placeholder={"Please type your name"}
+          required
           autoFocus
         />
-        <button type="submit" onClick={onSubmit} />
+        <input className={styles.submit} type="submit" />
       </form>
     </div>
   );
