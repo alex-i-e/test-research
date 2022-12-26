@@ -6,9 +6,19 @@
   align-items: center;
 }
 
-.img {
+.img[data-is-loaded="false"] {
+  width: 0;
+  height: 300px;
 }
 
-.figcaption {
-  margin: 8px 4px;
+.img[data-is-loaded="true"] {
+  width: 200px;
+}
+
+.fallback {
+  width: 200px;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
 }

@@ -13,38 +13,44 @@ enum SearchFields {
   search = "search",
 }
 
-const SearchForm = forwardRef<
-  { getSearchValue(): string },
-  {
-    onSearch(e: FormEvent<HTMLFormElement>): Promise<void>;
+interface RefProps {
+  getSearchValue(): string;
+}
+interface ComponentProps {
+  onSearch(e: FormEvent<HTMLFormElement>): Promise<void>;
+  isLoading: boolean;
+}
+const SearchForm = forwardRef<RefProps, ComponentProps>(
+  ({ onSearch, isLoading }, ref) => {
+    const formRef = useRef<HTMLFormElement>(null);
+    useImperativeHandle(ref, () => ({
+      getSearchValue() {
+        if (!formRef.current) return "";
+
+        const formData = new FormData(formRef.current);
+        const search = formData.get(SearchFields.search) as string;
+
+        return search ?? "";
+      },
+    }));
+
+    return (
+      <form ref={formRef} className={styles.form} onSubmit={onSearch}>
+        <label htmlFor={SearchFields.search}>
+          <Input
+            type="search"
+            placeholder="Please type text"
+            autoFocus
+            name={SearchFields.search}
+            required
+          />
+        </label>
+        <Button type="submit" isLoading={isLoading}>
+          Search
+        </Button>
+      </form>
+    );
   }
->(({ onSearch }, ref) => {
-  const formRef = useRef<HTMLFormElement>(null);
-  useImperativeHandle(ref, () => ({
-    getSearchValue() {
-      if (!formRef.current) return "";
-
-      const formData = new FormData(formRef.current);
-      const search = formData.get(SearchFields.search) as string;
-
-      return search ?? "";
-    },
-  }));
-
-  return (
-    <form ref={formRef} className={styles.form} onSubmit={onSearch}>
-      <label htmlFor={SearchFields.search}>
-        <Input
-          type="search"
-          placeholder="Please type text"
-          autoFocus
-          name={SearchFields.search}
-          required
-        />
-      </label>
-      <Button type="submit">Search</Button>
-    </form>
-  );
-});
+);
 
 export { SearchForm };

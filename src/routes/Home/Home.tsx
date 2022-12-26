@@ -22,12 +22,16 @@ const Home: FC = () => {
       <Header />
       <main className={styles.main}>
         <div className={styles.searchSection}>
-          <SearchForm ref={formRef} onSearch={onNewRequest} />
+          <SearchForm
+            ref={formRef}
+            onSearch={onNewRequest}
+            isLoading={isLoading}
+          />
           <Button onClick={() => setPage((page ?? 0) + 1)}>Next</Button>
         </div>
         <div className={styles.gridWrapper}>
           <SourceGrid sources={sources} />
-          {isLoading && <Spinner />}
+          {isLoading && <Spinner isRelative />}
         </div>
       </main>
     </div>
