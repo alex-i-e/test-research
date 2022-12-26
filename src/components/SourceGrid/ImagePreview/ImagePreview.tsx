@@ -15,7 +15,6 @@ const ImagePreview: FC<Props> = ({ source }) => {
         alt={source.alt_description}
         title={source.description}
       />
-      {/*<figcaption className={styles.figcaption}>{source.description}</figcaption>*/}
     </figure>
   );
 };

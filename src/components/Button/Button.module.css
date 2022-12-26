@@ -1,0 +1,6 @@
+.button {
+  border-radius: var(--border-radius);
+  height: var(--input-height);
+  background-color: var(--sapphire80);
+  color: white;
+}

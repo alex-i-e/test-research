@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { AuthProvider } from "./contexts/AuthContext/AuthContext";
 import { AclRoute } from "./routes/AclRoute/AclRoute";
+import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 
 const Home = lazy(() => import("./routes/Home/Home"));
 const NotFound = lazy(() => import("./routes/NotFound/NotFound"));
@@ -18,8 +19,10 @@ function App() {
             <Route
               index
               element={
-                <AclRoute path="/">
-                  <Home />
+                <AclRoute>
+                  <ErrorBoundary>
+                    <Home />
+                  </ErrorBoundary>
                 </AclRoute>
               }
             />

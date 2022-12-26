@@ -1,6 +1,8 @@
 import React, { FC, FormEvent, useRef } from "react";
 
 import { useAuth } from "../../contexts/AuthContext/useAuth";
+import { Button } from "../../components/Button/Button";
+import { Input } from "../../components/Input/Input";
 
 import styles from "./Login.module.css";
 
@@ -26,16 +28,19 @@ const Login: FC = () => {
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Enjoy image searching...</h1>
       <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
-        <label className={styles.label}>Name</label>
-        <input
-          className={styles.input}
-          type="text"
-          name={LoginFields.login}
-          placeholder={"Please type your name"}
-          required
-          autoFocus
-        />
-        <input className={styles.submit} type="submit" />
+        <label className={styles.inputWrapper}>
+          <span className={styles.label}>Name</span>
+          <Input
+            type="text"
+            name={LoginFields.login}
+            placeholder={"Please type your name"}
+            required
+            autoFocus
+          />
+        </label>
+        <Button cssClass={styles.submit} type="submit">
+          Submit
+        </Button>
       </form>
     </div>
   );

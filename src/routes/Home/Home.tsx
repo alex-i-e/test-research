@@ -1,54 +1,31 @@
-import React, { FC, FormEvent, useRef, useState } from "react";
+import React, { FC, useRef } from "react";
 
-import { useAuth } from "../../contexts/AuthContext/useAuth";
-import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { SearchForm } from "./SearchForm/SearchForm";
 import { SourceGrid } from "../../components/SourceGrid/SourceGrid";
-import { ImageService } from "../../services/ImageService/ImageService";
-import { ImageApi } from "../../services/ImageService/interfaces";
-
-import styles from "./Home.module.css";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { Button } from "../../components/Button/Button";
+
+import { useDataSource } from "./useDataSource";
+import { Header } from "./Header/Header";
+import styles from "./Home.module.css";
 
 const Home: FC = () => {
-  const { login, setLogin } = useAuth();
   const formRef = useRef<{
     getSearchValue(): string;
   }>(null);
-  const [sources, setSources] = useState<ImageApi[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onLogout = () => {
-    setLogin(null);
-  };
-
-  const onSearch = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setIsLoading(true);
-    const query = formRef.current?.getSearchValue().trim();
-    const data = await ImageService.getAll({
-      query,
-    });
-
-    setIsLoading(false);
-    setSources(data.results);
-  };
-
-  const loginText = `Hello, ${login}!`;
+  const { sources, page, isLoading, setPage, onNewRequest } = useDataSource({
+    formRef,
+  });
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <span className={styles.loginText}>{loginText}</span>
-        <button className={styles.logoutButton} onClick={onLogout}>
-          Logout
-        </button>
-      </header>
+      <Header />
       <main className={styles.main}>
         <div className={styles.searchSection}>
-          <SearchInput ref={formRef} onSearch={onSearch} />
+          <SearchForm ref={formRef} onSearch={onNewRequest} />
+          <Button onClick={() => setPage((page ?? 0) + 1)}>Next</Button>
         </div>
-        <div>
+        <div className={styles.gridWrapper}>
           <SourceGrid sources={sources} />
           {isLoading && <Spinner />}
         </div>

@@ -1,0 +1,18 @@
+.header {
+  grid-area: header;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  border-bottom: var(--purple100) 2px solid;
+  background-color: var(--pink100);
+  box-shadow: var(--sapphire100) 4px 0 20px;
+}
+
+.loginText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 50vw;
+}

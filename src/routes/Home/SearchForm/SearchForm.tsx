@@ -4,13 +4,16 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
-import styles from "../../routes/Home/Home.module.css";
+
+import { Button } from "../../../components/Button/Button";
+import { Input } from "../../../components/Input/Input";
+import styles from "./SearchForm.module.css";
 
 enum SearchFields {
   search = "search",
 }
 
-const SearchInput = forwardRef<
+const SearchForm = forwardRef<
   { getSearchValue(): string },
   {
     onSearch(e: FormEvent<HTMLFormElement>): Promise<void>;
@@ -31,25 +34,17 @@ const SearchInput = forwardRef<
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSearch}>
       <label htmlFor={SearchFields.search}>
-        Search by text:
-        <input
+        <Input
           type="search"
           placeholder="Please type text"
           autoFocus
           name={SearchFields.search}
           required
-          list="searchOptions"
         />
       </label>
-      <input type="submit" value="Search" />
-      <datalist id="searchOptions">
-        <option value="cat" />
-        <option value="dog" />
-        <option value="apple" />
-        <option value="orange" />
-      </datalist>
+      <Button type="submit">Search</Button>
     </form>
   );
 });
 
-export { SearchInput };
+export { SearchForm };

@@ -7,3 +7,9 @@
     minmax(var(--auto-grid-min-size), 1fr)
   );
 }
+
+.emptyList {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}

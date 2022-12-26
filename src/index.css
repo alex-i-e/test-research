@@ -1,6 +1,7 @@
 @import "normalize.css";
 @import "./styles/pallete.css";
 @import "./styles/fonts.css";
+@import "./styles/variables.css";
 
 body {
   font-family: "AwesomeFont", serif;

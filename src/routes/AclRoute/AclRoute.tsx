@@ -1,12 +1,11 @@
 import React, { FC, PropsWithChildren, Suspense } from "react";
-import { RouteProps } from "react-router";
 
 import { useAuth } from "../../contexts/AuthContext/useAuth";
 import { Spinner } from "../../components/Spinner/Spinner";
 
 const Login = React.lazy(() => import("../Login/Login"));
 
-const AclRoute: FC<PropsWithChildren & RouteProps> = ({ children }) => {
+const AclRoute: FC<PropsWithChildren> = ({ children }) => {
   const { isAuth } = useAuth();
   const output = !isAuth ? <Login /> : <>{children}</>;
 

@@ -10,12 +10,14 @@ interface IAuthContext {
   isAuth: boolean;
   login: string | null;
   setLogin(v: string | null): void;
+  resetLogin(): void;
 }
 
 const authContextState: IAuthContext = {
   isAuth: false,
   login: null,
   setLogin: Function,
+  resetLogin: Function,
 };
 
 const AuthContext = createContext(authContextState);
@@ -28,6 +30,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
       isAuth: Boolean(login),
       login,
       setLogin,
+      resetLogin: () => setLogin(null),
     }),
     [login, setLogin]
   );
