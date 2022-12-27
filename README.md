@@ -17,3 +17,4 @@ I used Unsplash API to provide the good configured settings of images. API provi
 - add synchronization with URL params when search "query" was updated, and vise versa
 - add support for SCSS/SASS preprocessor
 - add support for i18-n
+- fix relative path's in favor of absolute one
