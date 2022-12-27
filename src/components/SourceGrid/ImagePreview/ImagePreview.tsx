@@ -14,7 +14,7 @@ const ImagePreview: FC<Props> = ({ source }) => {
   const srcSet = `${source.urls.raw}&w=200&dpr=1 1x, ${source.urls.raw}&w=200&fit=max&q=40&dpr=2 2x`;
 
   return (
-    <figure className={styles.figure}>
+    <figure className={styles.figure} data-testid="image">
       <img
         srcSet={srcSet}
         src={source.urls.thumb}
