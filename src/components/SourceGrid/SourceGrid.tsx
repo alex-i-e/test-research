@@ -6,11 +6,17 @@ import { ImageApi } from "../../services/ImageService/interfaces";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 interface Props {
+  isFirstPageLoaded: boolean;
   sources: ImageApi[];
   loadNextPage(): void;
 }
-const SourceGrid: FC<Props> = ({ sources, loadNextPage }) => {
+const SourceGrid: FC<Props> = ({
+  isFirstPageLoaded,
+  sources,
+  loadNextPage,
+}) => {
   useIntersectionObserver({
+    isFirstPageLoaded,
     targetSelector: `.${styles.observerTarget}`,
     loadNextPage,
   });
@@ -19,12 +25,14 @@ const SourceGrid: FC<Props> = ({ sources, loadNextPage }) => {
     return <div className={styles.emptyList}>Nothing to show yet.</div>;
 
   return (
-    <div className={styles.wrapper}>
-      {sources.map(item => (
-        <ImagePreview key={item.id} source={item} />
-      ))}
+    <>
+      <div className={styles.wrapper}>
+        {sources.map(item => (
+          <ImagePreview key={item.id} source={item} />
+        ))}
+      </div>
       <div className={styles.observerTarget} />
-    </div>
+    </>
   );
 };
 

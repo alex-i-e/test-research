@@ -1,16 +1,20 @@
 import { useEffect } from "react";
 
 interface Props {
+  isFirstPageLoaded: boolean;
   rootSelector?: string;
   targetSelector: string;
   loadNextPage(): void;
 }
 const useIntersectionObserver = ({
+  isFirstPageLoaded,
   rootSelector,
   targetSelector,
   loadNextPage,
 }: Props) => {
   useEffect(() => {
+    if (!isFirstPageLoaded) return;
+
     const callback: IntersectionObserverCallback = (
       entries: IntersectionObserverEntry[]
     ) => {
@@ -39,7 +43,7 @@ const useIntersectionObserver = ({
       if (!target) return;
       observer.unobserve(target);
     };
-  }, [loadNextPage]);
+  }, [isFirstPageLoaded, targetSelector]);
 };
 
 export { useIntersectionObserver };

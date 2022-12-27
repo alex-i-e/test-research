@@ -2,6 +2,7 @@ import { ImageService } from "../../services/ImageService/ImageService";
 import {
   FormEvent,
   MutableRefObject,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -16,6 +17,7 @@ const useDataSource = ({ formRef }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState<number | null>(null);
   const pageRef = useRef<number | null>(null);
+  const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
 
   const loadDataByPage = async (page: number) => {
     setIsLoading(true);
@@ -25,6 +27,13 @@ const useDataSource = ({ formRef }: Props) => {
       page,
     });
     setIsLoading(false);
+
+    if (page === 1 && data.results.length) {
+      setIsFirstPageLoaded(true);
+    }
+    if (page === 1 && !data.results.length) {
+      setIsFirstPageLoaded(false);
+    }
 
     if (page === 1) {
       setSources(data.results);
@@ -39,22 +48,30 @@ const useDataSource = ({ formRef }: Props) => {
 
     pageRef.current = 1;
     setPage(1);
-    loadDataByPage(1);
   };
 
+  const loadNextPage = useCallback(() => {
+    if (!pageRef.current) return;
+
+    pageRef.current += 1;
+    setPage(pageRef.current);
+  }, [setPage]);
+
   useEffect(() => {
-    if (!page || page === 1) return;
+    if (!page) return;
 
     loadDataByPage(page);
   }, [page]);
 
   return {
+    isFirstPageLoaded,
     sources,
     page,
     pageRef,
     isLoading,
     setPage,
     onNewRequest,
+    loadNextPage,
   };
 };
 
