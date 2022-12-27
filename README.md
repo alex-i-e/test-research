@@ -3,7 +3,7 @@
 ## Description
 I used Unsplash API to provide the good configured settings of images. API provides a basic list of sources for images by default and provides flexible settings to get appropriate images by sizes, by device-pixel-ratio.
 
-###Tools
+### Tools
 - vite builder: developing process is faster than bundle based dev server
 - vitest + testing-library + msw: respective package for testing, msw used for mock data from server
 - css modules + classnames: flexible component styling
