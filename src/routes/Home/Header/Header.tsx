@@ -11,9 +11,7 @@ const Header: FC = () => {
   return (
     <header className={styles.header}>
       <span className={styles.loginText}>{loginText}</span>
-      <Button onClick={resetLogin} isLoading>
-        Logout
-      </Button>
+      <Button onClick={resetLogin}>Logout</Button>
     </header>
   );
 };

@@ -25,4 +25,22 @@ describe("App", () => {
     await userEvent.click(submit);
     expect(await screen.findByText(/Welcome, Bob/i)).toBeInTheDocument();
   });
+
+  it("should come back to login page after logout", async () => {
+    render(<App />);
+
+    const input = await screen.findByPlaceholderText("Please type your name");
+    await userEvent.type(input, "Bob");
+
+    const submit = await screen.findByText("Submit");
+    await userEvent.click(submit);
+    expect(await screen.findByText(/Welcome, Bob/i)).toBeInTheDocument();
+
+    const logout = await screen.findByText("Logout");
+    await userEvent.click(logout);
+
+    expect(
+      await screen.findByText(/Enjoy image searching/i)
+    ).toBeInTheDocument();
+  });
 });
