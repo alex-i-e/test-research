@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 
 const Header: FC = () => {
   const { login, resetLogin } = useAuth();
-  const loginText = `Hello, ${login}!`;
+  const loginText = `Welcome, ${login}!`;
 
   return (
     <header className={styles.header}>

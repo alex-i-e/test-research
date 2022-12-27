@@ -13,3 +13,9 @@
   display: flex;
   justify-content: center;
 }
+
+.observerTarget {
+  display: block;
+  width: 0;
+  height: 1px;
+}

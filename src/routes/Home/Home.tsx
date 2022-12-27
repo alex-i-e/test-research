@@ -1,9 +1,8 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useCallback, useRef } from "react";
 
 import { SearchForm } from "./SearchForm/SearchForm";
 import { SourceGrid } from "../../components/SourceGrid/SourceGrid";
 import { Spinner } from "../../components/Spinner/Spinner";
-import { Button } from "../../components/Button/Button";
 
 import { useDataSource } from "./useDataSource";
 import { Header } from "./Header/Header";
@@ -13,9 +12,16 @@ const Home: FC = () => {
   const formRef = useRef<{
     getSearchValue(): string;
   }>(null);
-  const { sources, page, isLoading, setPage, onNewRequest } = useDataSource({
+  const { sources, isLoading, pageRef, setPage, onNewRequest } = useDataSource({
     formRef,
   });
+
+  const loadNextPage = useCallback(() => {
+    if (!pageRef.current) return;
+
+    pageRef.current += 1;
+    setPage(pageRef.current);
+  }, [setPage]);
 
   return (
     <div className={styles.wrapper}>
@@ -27,10 +33,9 @@ const Home: FC = () => {
             onSearch={onNewRequest}
             isLoading={isLoading}
           />
-          <Button onClick={() => setPage((page ?? 0) + 1)}>Next</Button>
         </div>
         <div className={styles.gridWrapper}>
-          <SourceGrid sources={sources} />
+          <SourceGrid sources={sources} loadNextPage={loadNextPage} />
           {isLoading && <Spinner isRelative />}
         </div>
       </main>

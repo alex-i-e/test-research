@@ -1,5 +1,11 @@
 import { ImageService } from "../../services/ImageService/ImageService";
-import { FormEvent, MutableRefObject, useEffect, useState } from "react";
+import {
+  FormEvent,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ImageApi } from "../../services/ImageService/interfaces";
 
 interface Props {
@@ -9,6 +15,7 @@ const useDataSource = ({ formRef }: Props) => {
   const [sources, setSources] = useState<ImageApi[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState<number | null>(null);
+  const pageRef = useRef<number | null>(null);
 
   const loadDataByPage = async (page: number) => {
     setIsLoading(true);
@@ -30,6 +37,7 @@ const useDataSource = ({ formRef }: Props) => {
   const onNewRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    pageRef.current = 1;
     setPage(1);
     loadDataByPage(1);
   };
@@ -43,6 +51,7 @@ const useDataSource = ({ formRef }: Props) => {
   return {
     sources,
     page,
+    pageRef,
     isLoading,
     setPage,
     onNewRequest,

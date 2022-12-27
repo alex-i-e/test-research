@@ -21,4 +21,5 @@
 
 .gridWrapper {
   overflow-y: scroll;
+  margin-bottom: 20px;
 }
