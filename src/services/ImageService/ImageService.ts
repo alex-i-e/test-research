@@ -28,7 +28,6 @@ class ImageService {
 
       return response.data;
     } catch (e) {
-      // @todo: add an error handling
       console.log("Error while fetching...");
       return {
         results: [],

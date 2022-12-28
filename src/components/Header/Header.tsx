@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
-import { Button } from "../../../components/Button/Button";
-import { useAuth } from "../../../contexts/AuthContext/useAuth";
+import { Button } from "../Button/Button";
+import { useAuth } from "../../contexts/AuthContext/useAuth";
 import styles from "./Header.module.css";
 
 const Header: FC = () => {

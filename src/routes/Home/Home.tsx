@@ -5,7 +5,7 @@ import { SourceGrid } from "../../components/SourceGrid/SourceGrid";
 import { Spinner } from "../../components/Spinner/Spinner";
 
 import { useDataSource } from "./useDataSource";
-import { Header } from "./Header/Header";
+import { Header } from "../../components/Header/Header";
 import styles from "./Home.module.css";
 
 const Home: FC = () => {
