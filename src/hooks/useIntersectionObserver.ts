@@ -44,7 +44,7 @@ const useIntersectionObserver = ({
     return () => {
       observer.unobserve(target);
     };
-  }, [isFirstPageLoaded, targetSelector]);
+  }, [isFirstPageLoaded, targetSelector, loadNextPage, rootSelector]);
 };
 
 export { useIntersectionObserver };

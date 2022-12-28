@@ -20,37 +20,43 @@ const useDataSource = ({ formRef }: Props) => {
   const pageRef = useRef<number | null>(null);
   const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
 
-  const loadDataByPage = async (page: number) => {
-    const query = formRef.current?.getSearchValue().trim() ?? "";
-    if (query.length === 0) return;
+  const loadDataByPage = useCallback(
+    async (page: number) => {
+      const query = formRef.current?.getSearchValue().trim() ?? "";
+      if (query.length === 0) return;
 
-    setIsLoading(true);
-    const data = await ImageService.getAll({
-      query,
-      page,
-    });
-    setIsLoading(false);
+      setIsLoading(true);
+      const data = await ImageService.getAll({
+        query,
+        page,
+      });
+      setIsLoading(false);
 
-    if (page !== 1) {
-      setSources(prev => [...prev, ...data.results]);
+      if (page !== 1) {
+        setSources(prev => [...prev, ...data.results]);
 
-      return;
-    }
+        return;
+      }
 
-    setIsFirstPageLoaded(Boolean(data.results.length));
-    setSources(data.results);
-  };
+      setIsFirstPageLoaded(Boolean(data.results.length));
+      setSources(data.results);
+    },
+    [formRef]
+  );
 
-  const onNewRequest = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onNewRequest = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const query = formRef.current?.getSearchValue().trim() ?? "";
-    if (query.length === 0) return;
+      const query = formRef.current?.getSearchValue().trim() ?? "";
+      if (query.length === 0) return;
 
-    pageRef.current = 1;
-    setPage(1);
-    loadDataByPage(1);
-  };
+      pageRef.current = 1;
+      setPage(1);
+      loadDataByPage(1);
+    },
+    [formRef, loadDataByPage]
+  );
 
   const loadNextPage = useCallback(() => {
     if (pageRef.current === null) return;
@@ -71,7 +77,7 @@ const useDataSource = ({ formRef }: Props) => {
     if (page === null || page === 1) return;
 
     loadDataByPage(page);
-  }, [page]);
+  }, [page, loadDataByPage]);
 
   return {
     isFirstPageLoaded,
