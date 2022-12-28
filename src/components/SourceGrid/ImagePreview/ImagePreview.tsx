@@ -12,6 +12,7 @@ const ImagePreview: FC<Props> = ({ source }) => {
     setIsLoaded(true);
   };
   const srcSet = `${source.urls.raw}&w=200&dpr=1 1x, ${source.urls.raw}&w=200&fit=max&q=40&dpr=2 2x`;
+  const imageHeight = (source.height / source.width) * 200;
 
   return (
     <figure className={styles.figure} data-testid="image">
@@ -25,12 +26,16 @@ const ImagePreview: FC<Props> = ({ source }) => {
         data-is-loaded={isLoaded}
         data-blur-hash={source.blur_hash}
         loading="lazy"
+        style={{
+          "--image-height": `${imageHeight}px`,
+        }}
       />
       {!isLoaded && (
         <div
           className={styles.fallback}
           style={{
-            backgroundColor: source.color,
+            "--image-height": `${imageHeight}px`,
+            "--image-bg-color": source.color,
           }}
         />
       )}

@@ -1,4 +1,5 @@
 .figure {
+  --input-width: 200px;
   box-shadow: #1a1a0944 4px 4px 10px;
   margin: 0;
   display: flex;
@@ -8,17 +9,15 @@
 
 .img[data-is-loaded="false"] {
   width: 0;
-  height: 300px;
+  height: var(--image-height);
 }
 
 .img[data-is-loaded="true"] {
-  width: 200px;
+  width: var(--input-width);
 }
 
 .fallback {
-  width: 200px;
-  height: 300px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
+  width: var(--input-width);
+  height: var(--image-height);
+  background-color: var(--image-bg-color);
 }
