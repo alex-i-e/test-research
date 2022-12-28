@@ -1,4 +1,3 @@
-import { ImageService } from "../../services/ImageService/ImageService";
 import {
   FormEvent,
   MutableRefObject,
@@ -7,6 +6,8 @@ import {
   useRef,
   useState,
 } from "react";
+
+import { ImageService } from "../../services/ImageService/ImageService";
 import { ImageApi } from "../../services/ImageService/interfaces";
 
 interface Props {
@@ -20,34 +21,35 @@ const useDataSource = ({ formRef }: Props) => {
   const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
 
   const loadDataByPage = async (page: number) => {
-    setIsLoading(true);
     const query = formRef.current?.getSearchValue().trim();
+    if (!query) return;
+
+    setIsLoading(true);
     const data = await ImageService.getAll({
       query,
       page,
     });
     setIsLoading(false);
 
-    if (page === 1 && data.results.length) {
-      setIsFirstPageLoaded(true);
-    }
-    if (page === 1 && !data.results.length) {
-      setIsFirstPageLoaded(false);
-    }
+    if (page !== 1) {
+      setSources(prev => [...prev, ...data.results]);
 
-    if (page === 1) {
-      setSources(data.results);
       return;
     }
 
-    setSources(prev => [...prev, ...data.results]);
+    setIsFirstPageLoaded(Boolean(data.results.length));
+    setSources(data.results);
   };
 
   const onNewRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const query = formRef.current?.getSearchValue().trim();
+    if (!query) return;
+
     pageRef.current = 1;
     setPage(1);
+    loadDataByPage(1);
   };
 
   const loadNextPage = useCallback(() => {
@@ -57,8 +59,16 @@ const useDataSource = ({ formRef }: Props) => {
     setPage(pageRef.current);
   }, [setPage]);
 
+  const resetSources = useCallback(() => {
+    pageRef.current = null;
+    setPage(null);
+    setSources([]);
+    setIsLoading(false);
+    setIsFirstPageLoaded(false);
+  }, []);
+
   useEffect(() => {
-    if (!page) return;
+    if (!page || page === 1) return;
 
     loadDataByPage(page);
   }, [page]);
@@ -72,6 +82,7 @@ const useDataSource = ({ formRef }: Props) => {
     setPage,
     onNewRequest,
     loadNextPage,
+    resetSources,
   };
 };
 

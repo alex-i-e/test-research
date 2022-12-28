@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import React, { ChangeEventHandler, FC, useRef } from "react";
 
 import { SearchForm } from "./SearchForm/SearchForm";
 import { SourceGrid } from "../../components/SourceGrid/SourceGrid";
@@ -12,10 +12,16 @@ const Home: FC = () => {
   const formRef = useRef<{
     getSearchValue(): string;
   }>(null);
-  const { isFirstPageLoaded, sources, isLoading, onNewRequest, loadNextPage } =
-    useDataSource({
-      formRef,
-    });
+  const {
+    isFirstPageLoaded,
+    sources,
+    isLoading,
+    onNewRequest,
+    loadNextPage,
+    resetSources,
+  } = useDataSource({
+    formRef,
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -24,8 +30,9 @@ const Home: FC = () => {
         <div className={styles.searchSection}>
           <SearchForm
             ref={formRef}
-            onSearch={onNewRequest}
             isLoading={isLoading}
+            onSearch={onNewRequest}
+            onInputChange={resetSources}
           />
         </div>
         <div className={styles.gridWrapper}>

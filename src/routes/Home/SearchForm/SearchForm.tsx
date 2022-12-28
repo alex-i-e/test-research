@@ -1,4 +1,5 @@
 import React, {
+  ChangeEventHandler,
   FormEvent,
   forwardRef,
   useImperativeHandle,
@@ -17,11 +18,12 @@ interface RefProps {
   getSearchValue(): string;
 }
 interface ComponentProps {
+  onInputChange: ChangeEventHandler<HTMLInputElement>;
   onSearch(e: FormEvent<HTMLFormElement>): Promise<void>;
   isLoading: boolean;
 }
 const SearchForm = forwardRef<RefProps, ComponentProps>(
-  ({ onSearch, isLoading }, ref) => {
+  ({ onInputChange, onSearch, isLoading }, ref) => {
     const formRef = useRef<HTMLFormElement>(null);
     useImperativeHandle(ref, () => ({
       getSearchValue() {
@@ -43,6 +45,7 @@ const SearchForm = forwardRef<RefProps, ComponentProps>(
             autoFocus
             name={SearchFields.search}
             required
+            onChange={onInputChange}
           />
         </label>
         <Button type="submit" isLoading={isLoading}>
