@@ -1,22 +1,20 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 
 import { ImageApi } from "../../../services/ImageService/interfaces";
 import styles from "./ImagePreview.module.css";
+import { useImagePreview } from "./useImagePreview";
 
 interface Props {
   source: ImageApi;
 }
+
 const ImagePreview: FC<Props> = ({ source }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const onLoad = () => {
-    setIsLoaded(true);
-  };
-  const srcSet = `${source.urls.raw}&w=200&dpr=1 1x, ${source.urls.raw}&w=200&fit=max&q=40&dpr=2 2x`;
-  const imageHeight = (source.height / source.width) * 200;
+  const { isLoaded, imageHeight, srcSet, onLoad } = useImagePreview(source);
 
   return (
     <figure className={styles.figure} data-testid="image">
       <img
+        data-testid={source.id}
         srcSet={srcSet}
         src={source.urls.thumb}
         className={styles.img}
@@ -33,6 +31,7 @@ const ImagePreview: FC<Props> = ({ source }) => {
       />
       {!isLoaded && (
         <div
+          data-testid={`bg-${source.id}`}
           className={styles.fallback}
           style={{
             // @ts-ignore
