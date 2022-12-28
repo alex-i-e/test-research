@@ -2,6 +2,8 @@ import React, {
   createContext,
   FC,
   PropsWithChildren,
+  useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -20,10 +22,20 @@ const authContextState: IAuthContext = {
   resetLogin: Function,
 };
 
+const LOGIN_KEY = "login;";
+
 const AuthContext = createContext(authContextState);
 
 const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [login, setLogin] = useState<string | null>(null);
+  const sessionStorageLogin = window.sessionStorage.getItem(LOGIN_KEY);
+  const setSessionStorageLogin = useCallback((v: string | null) => {
+    window.sessionStorage.setItem(LOGIN_KEY, v ?? "");
+  }, []);
+  const [login, setLogin] = useState<string | null>(sessionStorageLogin);
+
+  useEffect(() => {
+    setSessionStorageLogin(login);
+  }, [login, setSessionStorageLogin]);
 
   const value = useMemo(
     () => ({
