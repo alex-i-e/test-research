@@ -5,6 +5,10 @@ import App from "./App";
 import { render, screen, userEvent } from "./tests/test-utils";
 
 describe("App", () => {
+  afterEach(() => {
+    window.sessionStorage.clear();
+  });
+
   it("should render login page", async () => {
     render(<App />);
     expect(
