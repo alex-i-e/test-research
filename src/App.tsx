@@ -2,10 +2,11 @@ import React, { lazy } from "react";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { AuthProvider } from "./contexts/AuthContext/AuthContext";
 import { AclRoute } from "./routes/AclRoute/AclRoute";
-import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
+import { ErrorFallback } from "./components/ErrorFallback/ErrorFallback";
 
 const Home = lazy(() => import("./routes/Home/Home"));
 const NotFound = lazy(() => import("./routes/NotFound/NotFound"));
@@ -20,7 +21,7 @@ function App() {
               index
               element={
                 <AclRoute>
-                  <ErrorBoundary>
+                  <ErrorBoundary FallbackComponent={ErrorFallback}>
                     <Home />
                   </ErrorBoundary>
                 </AclRoute>
