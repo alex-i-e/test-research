@@ -25,7 +25,7 @@ const ImagePreview: FC<Props> = ({ source }) => {
         data-blur-hash={source.blur_hash}
         loading="lazy"
         style={{
-          // @ts-ignore
+          // @ts-ignore: to provide dynamic values into the class
           "--image-height": `${imageHeight}px`,
         }}
       />
@@ -34,7 +34,7 @@ const ImagePreview: FC<Props> = ({ source }) => {
           data-testid={`bg-${source.id}`}
           className={styles.fallback}
           style={{
-            // @ts-ignore
+            // @ts-ignore: to provide dynamic values into the class
             "--image-height": `${imageHeight}px`,
             "--image-bg-color": source.color,
           }}
