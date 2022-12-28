@@ -4,3 +4,6 @@
   background-color: var(--sapphire80);
   color: white;
 }
+.button[disabled] {
+  background-color: var(--sapphire40);
+}

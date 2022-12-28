@@ -27,6 +27,7 @@ const ImagePreview: FC<Props> = ({ source }) => {
         data-blur-hash={source.blur_hash}
         loading="lazy"
         style={{
+          // @ts-ignore
           "--image-height": `${imageHeight}px`,
         }}
       />
@@ -34,6 +35,7 @@ const ImagePreview: FC<Props> = ({ source }) => {
         <div
           className={styles.fallback}
           style={{
+            // @ts-ignore
             "--image-height": `${imageHeight}px`,
             "--image-bg-color": source.color,
           }}

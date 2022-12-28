@@ -1,9 +1,12 @@
 import React, {
+  ChangeEvent,
   ChangeEventHandler,
   FormEvent,
   forwardRef,
+  useCallback,
   useImperativeHandle,
   useRef,
+  useState,
 } from "react";
 
 import { Button } from "../../../components/Button/Button";
@@ -25,6 +28,25 @@ interface ComponentProps {
 const SearchForm = forwardRef<RefProps, ComponentProps>(
   ({ onInputChange, onSearch, isLoading }, ref) => {
     const formRef = useRef<HTMLFormElement>(null);
+    const [isSearchChanged, setIsSearchChanged] = useState(false);
+
+    const handleOnChange = useCallback(
+      (e: ChangeEvent<HTMLInputElement>) => {
+        setIsSearchChanged(true);
+        onInputChange(e);
+      },
+      [setIsSearchChanged, onInputChange]
+    );
+    const handleOnSearch = useCallback(
+      (e: FormEvent<HTMLFormElement>) => {
+        if (!isSearchChanged) return;
+
+        onSearch(e);
+        setIsSearchChanged(false);
+      },
+      [isSearchChanged, onSearch, setIsSearchChanged]
+    );
+
     useImperativeHandle(ref, () => ({
       getSearchValue() {
         if (!formRef.current) return "";
@@ -37,7 +59,7 @@ const SearchForm = forwardRef<RefProps, ComponentProps>(
     }));
 
     return (
-      <form ref={formRef} className={styles.form} onSubmit={onSearch}>
+      <form ref={formRef} className={styles.form} onSubmit={handleOnSearch}>
         <label htmlFor={SearchFields.search}>
           <Input
             type="search"
@@ -45,10 +67,10 @@ const SearchForm = forwardRef<RefProps, ComponentProps>(
             autoFocus
             name={SearchFields.search}
             required
-            onChange={onInputChange}
+            onChange={handleOnChange}
           />
         </label>
-        <Button type="submit" isLoading={isLoading}>
+        <Button type="submit" isLoading={isLoading} disabled={!isSearchChanged}>
           Search
         </Button>
       </form>
