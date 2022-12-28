@@ -21,7 +21,8 @@
         "allowString": false,
         "allowNumber": false
       }
-    ]
+    ],
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "ignorePatterns": ["src/**/*.test.ts"]
 }

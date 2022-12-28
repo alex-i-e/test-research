@@ -18,7 +18,7 @@ const useIntersectionObserver = ({
     const callback: IntersectionObserverCallback = (
       entries: IntersectionObserverEntry[]
     ) => {
-      if (!entries.length) return;
+      if (entries.length === 0) return;
 
       const intersection = entries[0];
       if (intersection.intersectionRatio !== 1) return;
@@ -26,21 +26,22 @@ const useIntersectionObserver = ({
       loadNextPage();
     };
 
-    let options = {
-      root: rootSelector ? document.querySelector(rootSelector) : null,
+    const root =
+      rootSelector !== undefined ? document.querySelector(rootSelector) : null;
+    const options = {
+      root,
       rootMargin: "0px",
       threshold: 1,
     };
 
-    let observer = new IntersectionObserver(callback, options);
-    let target = document.querySelector(targetSelector);
+    const observer = new IntersectionObserver(callback, options);
+    const target = document.querySelector(targetSelector);
 
     if (!target) return;
 
-    observer.observe(target!);
+    observer.observe(target);
 
     return () => {
-      if (!target) return;
       observer.unobserve(target);
     };
   }, [isFirstPageLoaded, targetSelector]);

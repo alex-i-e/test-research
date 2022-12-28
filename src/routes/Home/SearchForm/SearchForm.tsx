@@ -77,5 +77,6 @@ const SearchForm = forwardRef<RefProps, ComponentProps>(
     );
   }
 );
+SearchForm.displayName = "SearchForm";
 
 export { SearchForm };

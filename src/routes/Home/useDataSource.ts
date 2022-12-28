@@ -21,8 +21,8 @@ const useDataSource = ({ formRef }: Props) => {
   const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
 
   const loadDataByPage = async (page: number) => {
-    const query = formRef.current?.getSearchValue().trim();
-    if (!query) return;
+    const query = formRef.current?.getSearchValue().trim() ?? "";
+    if (query.length === 0) return;
 
     setIsLoading(true);
     const data = await ImageService.getAll({
@@ -44,8 +44,8 @@ const useDataSource = ({ formRef }: Props) => {
   const onNewRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const query = formRef.current?.getSearchValue().trim();
-    if (!query) return;
+    const query = formRef.current?.getSearchValue().trim() ?? "";
+    if (query.length === 0) return;
 
     pageRef.current = 1;
     setPage(1);
@@ -53,7 +53,7 @@ const useDataSource = ({ formRef }: Props) => {
   };
 
   const loadNextPage = useCallback(() => {
-    if (!pageRef.current) return;
+    if (pageRef.current === null) return;
 
     pageRef.current += 1;
     setPage(pageRef.current);
@@ -68,7 +68,7 @@ const useDataSource = ({ formRef }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (!page || page === 1) return;
+    if (page === null || page === 1) return;
 
     loadDataByPage(page);
   }, [page]);

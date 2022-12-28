@@ -1,3 +1,4 @@
+import React from "react";
 import { it, describe, expect } from "vitest";
 
 import Home from "./Home";

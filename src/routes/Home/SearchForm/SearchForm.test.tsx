@@ -1,4 +1,6 @@
+import React from "react";
 import { it, describe, expect, vi } from "vitest";
+
 import { screen, render } from "../../../tests/test-utils";
 import { SearchForm } from "./SearchForm";
 

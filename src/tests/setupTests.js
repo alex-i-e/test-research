@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { server } from "../mocks/server";
-import { vi } from "vitest";
+import { vi, beforeAll, afterEach, afterAll } from "vitest";
 
 beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 afterAll(() => server.close());

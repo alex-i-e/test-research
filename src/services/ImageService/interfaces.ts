@@ -9,8 +9,8 @@ export interface ImageApi {
   blur_hash: string;
   likes: number;
   liked_by_user: boolean;
-  description: string;
-  alt_description: string;
+  description: string | null;
+  alt_description: string | null;
   user: {
     id: string;
     username: string;

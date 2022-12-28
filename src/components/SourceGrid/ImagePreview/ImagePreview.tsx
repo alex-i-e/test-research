@@ -18,8 +18,8 @@ const ImagePreview: FC<Props> = ({ source }) => {
         srcSet={srcSet}
         src={source.urls.thumb}
         className={styles.img}
-        alt={source.alt_description}
-        title={source.description}
+        alt={source.alt_description ?? ""}
+        title={source.description ?? ""}
         onLoad={onLoad}
         data-is-loaded={isLoaded}
         data-blur-hash={source.blur_hash}

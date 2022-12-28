@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, FC, useRef } from "react";
+import React, { FC, useRef } from "react";
 
 import { SearchForm } from "./SearchForm/SearchForm";
 import { SourceGrid } from "../../components/SourceGrid/SourceGrid";

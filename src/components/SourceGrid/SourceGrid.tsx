@@ -21,7 +21,7 @@ const SourceGrid: FC<Props> = ({
     loadNextPage,
   });
 
-  if (!sources.length)
+  if (sources.length === 0)
     return <div className={styles.emptyList}>Nothing to show yet.</div>;
 
   return (

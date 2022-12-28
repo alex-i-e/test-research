@@ -1,4 +1,4 @@
-/* eslint-disable import/export */
+import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import { afterEach } from "vitest";
 
