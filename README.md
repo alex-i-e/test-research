@@ -30,5 +30,5 @@ I used Unsplash API to provide the good configured settings of images. API provi
  - run eslint: `npm run lint`
  - run prettier formatting: `npm run format`
  - run tests: `npm run test`
- - check tests in browser view: `npm run test`
+ - check tests in browser view: `npm run test:ui`
  - check test coverage: `npm run coverage`
