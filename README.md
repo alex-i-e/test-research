@@ -22,3 +22,13 @@ I used Unsplash API to provide the good configured settings of images. API provi
 - add support for SCSS/SASS preprocessor
 - add support for i18-n
 - fix relative path's in favor of absolute one
+
+### Start application:
+ - run app on localhost only: `npm run dev` or `yarn dev`
+ - run app on localhost and network: `npm run dev -- --host` or `yarn dev --host`
+### Helper scripts:
+ - run eslint: `npm run lint`
+ - run prettier formatting: `npm run format`
+ - run tests: `npm run test`
+ - check tests in browser view: `npm run test`
+ - check test coverage: `npm run coverage`
