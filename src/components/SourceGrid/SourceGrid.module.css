@@ -6,12 +6,14 @@
     auto-fill,
     minmax(var(--auto-grid-min-size), 1fr)
   );
+  padding-top: 10px;
 }
 
 .emptyList {
   position: relative;
   display: flex;
   justify-content: center;
+  padding-top: 10px;
 }
 
 .observerTarget {
