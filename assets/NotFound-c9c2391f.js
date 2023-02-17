@@ -1,1 +1,0 @@
-import{j as s,L as r}from"./index-c294878b.js";const o="_wrapper_19gbz_1",e={wrapper:o},t=()=>s.exports.jsxs("main",{className:e.wrapper,children:[s.exports.jsx("p",{className:e.message,children:"Page not found"}),s.exports.jsx(r,{to:"/",children:"Go Home"})]});export{t as default};
